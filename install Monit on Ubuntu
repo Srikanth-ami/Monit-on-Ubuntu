@@ -1,0 +1,37 @@
+How to install Monit on Ubuntu
+  ******************************
+ 
+  sudo apt-get update
+  sudo apt install monit
+  sudo monit
+  sudo systemctl status monit
+  sudo nano /etc/monit/monitrc
+  set daemon  120
+  sudo systemctl restart monit
+  sudo monit reload
+  monit start all
+*********************************************************
+#monitintamil #monitmonitoring #nginxintamil
+ How to monitor Nginx via Monit 
+ ******************************
+ sudo apt install nginx
+ 
+ sudo nano /etc/monit/conf.d/nginx
+
+ check process nginx with pidfile /run/nginx.pid
+     start program = "/usr/sbin/service nginx start" with timeout 60 seconds
+      stop program  = "/usr/sbin/service nginx stop"
+       if failed host 127.0.0.1 port 80 protocol http for 3 cycles then restart
+*************************************************************
+
+#monitintamil #monitmonitoring #monitalertmail
+
+  Note: mailserver gmail setting you will enalbe Less secure app access 
+         for mail send from monit tool
+ STEPS:
+  sudo nano /etc/monit
+  set alert AXXXEE@gmail.com  #alert send to this admin mail
+   #For monit 5.17 or later:
+   set mailserver smtp.gmail.com port 587
+     username "MYUSER" password "MYPASSWORD"
+      using tls 
